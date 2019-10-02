@@ -6,6 +6,7 @@ using Android.Support.V4.App;
 using Android.Content;
 using AltBeaconOrg.BoundBeacon.Powersave;
 using Android.Util;
+using System.Collections.Generic;
 
 namespace AltBeaconLibrary.Sample.Droid
 {
@@ -13,6 +14,7 @@ namespace AltBeaconLibrary.Sample.Droid
 	public class AltBeaconSampleApplication : Application, IBootstrapNotifier
 	{
 		private const string TAG = "AltBeaconSampleApplication";
+        private static readonly string BEACON_ID = Guid.Empty.ToString();
 
 		BeaconManager _beaconManager;
 
@@ -39,18 +41,19 @@ namespace AltBeaconLibrary.Sample.Droid
 
 			var iBeaconParser = new BeaconParser();
 			//	Estimote > 2013
-			iBeaconParser.SetBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24");
-			_beaconManager.BeaconParsers.Add(iBeaconParser);
+			//iBeaconParser.SetBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24");
+            iBeaconParser.SetBeaconLayout("m:2-3=0215,i:4-19,p:24-24");
+            _beaconManager.BeaconParsers.Add(iBeaconParser);
 
 			Log.Debug(TAG, "setting up background monitoring for beacons and power saving");
-			// wake up the app when a beacon is seen
-			_backgroundRegion = new Region("backgroundRegion", null, null, null);
+            // wake up the app when a beacon is seen
+            _backgroundRegion = new Region("testregion", new List<Identifier>() { Identifier.Parse(BEACON_ID) }, null); //new Region("backgroundRegion", null, null, null);
 			regionBootstrap = new RegionBootstrap(this, _backgroundRegion);
 
 			// simply constructing this class and holding a reference to it in your custom Application
 			// class will automatically cause the BeaconLibrary to save battery whenever the application
 			// is not visible.  This reduces bluetooth power usage by about 60%
-			backgroundPowerSaver = new BackgroundPowerSaver(this);
+			//backgroundPowerSaver = new BackgroundPowerSaver(this);
 		}
 
 		public void DidDetermineStateForRegion(int state, AltBeaconOrg.BoundBeacon.Region region)

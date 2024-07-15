@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>AndroidAltBeaconLibrary</id>
-    <version>2.19.4</version>
+    <version>2.20.6</version>
     <authors>AltBeacon.org</authors>
     <owners>Chris Riesgo</owners>
     <projectUrl>https://github.com/lnbot/Android-AltBeacon-Library</projectUrl>

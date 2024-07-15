@@ -30,6 +30,9 @@
 	<remove-node path="/api/package[@name='org.altbeacon.beacon']/class[@name='BeaconManager']/field[@name='rssiFilterImplClass']" />
 	<remove-node path="/api/package[@name='org.altbeacon.beacon.simulator']/class[@name='StaticBeaconSimulator']/field[@name='beacons']" />
 	<remove-node path="/api/package[@name='org.altbeacon.beacon']/class[@name='BeaconParser']/field[@name='mServiceUuidStartOffset']" />
+
+  <!-- Skip due to compilation issue -->
+  <remove-node path="/api/package[@name='org.altbeacon.beacon.utils']/class[@name='ChangeAwareCopyOnWriteArrayList']/method[@name='size' and count(parameter)=0]" />
 	
 	<!--- Hides inherited member -->
 	<remove-node path="/api/package[@name='org.altbeacon.beacon']/class[@name='AltBeacon']/field[@name='CREATOR']"/>
